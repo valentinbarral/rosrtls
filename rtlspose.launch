@@ -1,0 +1,6 @@
+<launch>
+    <node name="rtlspose" output="screen" pkg="gtec_rosrtls" type="rtlspose">
+        <param name="token" type="string" value="token" />
+        <param name="url" type="string" value="https://rtls:12/api/targetId/position" />
+    </node>
+</launch>

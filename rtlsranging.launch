@@ -1,0 +1,7 @@
+<launch>
+    <node name="rtlsranging" output="screen" pkg="gtec_rosrtls" type="rtlsranging">
+        <param name="token" type="string" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTI5NjQ2ZGM2NTFkZjViM2Q5OGFkMmIiLCJpYXQiOjE1Nzk3NzEwMDV9.4OetDMR1hHnGtb6a24AUMm2l-C5QqeG6JZ1aYUrit0o" />
+        <param name="url" type="string" value="https://localhost:4433/api/anchorsensors/" />
+        <param name="route" type="string" value="/measurements" />
+    </node>
+</launch>
