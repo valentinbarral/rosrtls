@@ -68,8 +68,8 @@ include_directories(
 set(SOURCE_FILES_RANGING src/rosrtls/publishers/node_ranging.cpp
     src/rosrtls/messages/rtls_ranging.cpp)
 
-#set(SOURCE_FILES_POSE src/rosrtls/publishers/node_pose.cpp
-#    src/rosrtls/messages/rtls_pose.cpp)
+set(SOURCE_FILES_POSE src/rosrtls/publishers/node_pose.cpp
+    src/rosrtls/messages/rtls_pose.cpp)
 
 
 ## Declare a cpp executable
@@ -84,9 +84,11 @@ add_dependencies(rtlsranging ${catkin_EXPORTED_TARGETS})
 add_dependencies(rtlsranging gtec_msgs_generate_messages_cpp)
 
 
-#add_executable(rtlspose ${SOURCE_FILES_POSE})
-#target_link_libraries(rtlspose
-#   ${catkin_LIBRARIES}
-# )
-#add_dependencies(rtlspose ${catkin_EXPORTED_TARGETS})
-#add_dependencies(rtlspose gtec_msgs_generate_messages_cpp)
+add_executable(rtlspose ${SOURCE_FILES_POSE})
+target_link_libraries(rtlspose
+   ${catkin_LIBRARIES}
+   ${LIBRESTCLIENT_CPP_LIBRARIES}
+   ${CURL_LIBRARIES}
+ )
+add_dependencies(rtlspose ${catkin_EXPORTED_TARGETS})
+add_dependencies(rtlspose gtec_msgs_generate_messages_cpp)
