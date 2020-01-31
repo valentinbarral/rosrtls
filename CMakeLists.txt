@@ -9,7 +9,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake_mo
 #message( ${CMAKE_CURRENT_SOURCE_DIR} )
 message( ${CMAKE_MODULE_PATH} )
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++11")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++11 -pthread")
 
 add_definitions(-std=c++11)
 
@@ -36,6 +36,7 @@ include_directories(${ARMADILLO_INCLUDE_DIRS})
 find_package(Restclient-cpp REQUIRED)
 include_directories(${LIBRESTCLIENT_CPP_INCLUDE_DIRS})
 
+set(CURL_LIBRARY "-lcurl") 
 find_package(CURL REQUIRED)
 include_directories($CURL_INCLUDE_DIRS)
 
