@@ -1,8 +1,9 @@
 <launch>
     <node name="rtlspose" output="screen" pkg="gtec_rosrtls" type="rtlspose">
-        <param name="token" type="string" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTI5NjQ2ZGM2NTFkZjViM2Q5OGFkMmIiLCJpYXQiOjE1Nzk3NzEwMDV9.4OetDMR1hHnGtb6a24AUMm2l-C5QqeG6JZ1aYUrit0o" />
+        <param name="token" type="string" value="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTRhNTYyM2U3ZGEwMjA5NzExNDUyMzUiLCJpYXQiOjE1ODE5MzAwMTl9.zvDDVTOWXueKa2cv3SD2ZKJNIkla5Gyhh79JHeGLnJA" />
         <param name="url" type="string" value="https://localhost:4433/api/targetdevices/" />
         <param name="route" type="string" value="/positions" />
-        <param name="targetDeviceId" type="string" value="tag6e5b" />
+        <param name="targetDeviceId" type="string" value="6F1D" />
+        <param name="poseTopic" type="string" value="/gtec/kfpos/"
     </node>
 </launch>

@@ -36,6 +36,7 @@ int main(int argc, char *argv[])
     std::string url;
     std::string route;
     std::string targetDeviceId, scenarioId, levelId;
+    std::string poseTopic;
 
     n.getParam("token", token);
     n.getParam("url", url);
@@ -43,11 +44,12 @@ int main(int argc, char *argv[])
     n.getParam("targetDeviceId", targetDeviceId);
     n.getParam("scenarioId", scenarioId);
     n.getParam("levelId", levelId);
+    n.getParam("poseTopic", poseTopic);
 
     RTLSPose rtlsPose(token, url, route, targetDeviceId, scenarioId, levelId);
 
     std::ostringstream stringStream;
-    stringStream << "/gtec/kfpos" << targetDeviceId.c_str();
+    stringStream << poseTopic.c_str() << "/" << targetDeviceId.c_str();
     std::string topicPos = stringStream.str();
 
     ros::Subscriber sub0 = n.subscribe<geometry_msgs::PoseWithCovarianceStamped>(topicPos, 12, &RTLSPose::newPose, &rtlsPose);

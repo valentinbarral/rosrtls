@@ -52,7 +52,7 @@ void RTLSPose::newPose(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr&
 
 
 	std::string fullUrl = this->_url + this->_targetDeviceId + this->_route;
-	ROS_INFO("New pose to send in rtls_pose. Full URL: %s", fullUrl.c_str());;
+	ROS_DEBUG("New pose to send in rtls_pose. Full URL: %s", fullUrl.c_str());;
 
 	RestClient::Connection* conn = new RestClient::Connection(fullUrl);
 
