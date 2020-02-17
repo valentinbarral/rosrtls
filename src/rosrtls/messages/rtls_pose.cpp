@@ -73,8 +73,6 @@ void RTLSPose::newPose(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr&
 	jsonMsg["error"] = jsonError;
 
 	jsonPosition["type"] = "geometric";
-	jsonPosition["scenarioId"] = this->_scenarioId;
-	jsonPosition["levelId"] = this->_levelId;
 	jsonPosition["pose"]["position"] = {pose_msg->pose.pose.position.x,pose_msg->pose.pose.position.y,pose_msg->pose.pose.position.z};
 	jsonPosition["pose"]["quaternion"] = {	pose_msg->pose.pose.orientation.x,pose_msg->pose.pose.orientation.y,pose_msg->pose.pose.orientation.z,pose_msg->pose.pose.orientation.w};
 	jsonMsg["position"] =  jsonPosition;

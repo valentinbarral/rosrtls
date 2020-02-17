@@ -4,7 +4,5 @@
         <param name="url" type="string" value="https://localhost:4433/api/targetdevices/" />
         <param name="route" type="string" value="/positions" />
         <param name="targetDeviceId" type="string" value="tag6e5b" />
-        <param name="scenarioId" type="string" value="tag6e5b" />
-        <param name="levelId" type="string" value="tag6e5b" />
     </node>
 </launch>
