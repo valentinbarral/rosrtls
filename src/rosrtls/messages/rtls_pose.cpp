@@ -51,7 +51,7 @@ void RTLSPose::newPose(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr&
 	std::vector<double> covarianceVector;
 
 
-	std::string fullUrl = this->_url + this->_targetDeviceId + this->_route;
+	std::string fullUrl = this->_url + this->_targetDeviceId;
 	ROS_DEBUG("New pose to send in rtls_pose. Full URL: %s", fullUrl.c_str());;
 
 	RestClient::Connection* conn = new RestClient::Connection(fullUrl);
@@ -62,22 +62,28 @@ void RTLSPose::newPose(const geometry_msgs::PoseWithCovarianceStamped::ConstPtr&
 	conn->SetHeaders(headers);
 
 	json jsonMsg;
-	json jsonPosition, jsonError;
+	json jsonPosition, jsonError, jsonEstimate, jsonPose;
 
-	jsonMsg["techsUsed"] = {"UWB"};
-	jsonMsg["timeWindow"] = 0;
-	jsonMsg["timestamp"] = 0;
+	jsonMsg["techName"] = "UWB";
+
+	jsonEstimate["timestamp"] = (double) pose_msg->header.stamp.sec + ((double) pose_msg->header.stamp.nsec)/1e9;
+	jsonEstimate["timeWindow"] = 0;
 
 	jsonError["type"] = "geometric";
-	jsonError["covariance"] = covarianceVector;
-	jsonMsg["error"] = jsonError;
+	jsonError["covariance"] = pose_msg->pose.covariance;
+	jsonEstimate["error"] = jsonError;
 
 	jsonPosition["type"] = "geometric";
-	jsonPosition["pose"]["position"] = {pose_msg->pose.pose.position.x,pose_msg->pose.pose.position.y,pose_msg->pose.pose.position.z};
-	jsonPosition["pose"]["quaternion"] = {	pose_msg->pose.pose.orientation.x,pose_msg->pose.pose.orientation.y,pose_msg->pose.pose.orientation.z,pose_msg->pose.pose.orientation.w};
-	jsonMsg["position"] =  jsonPosition;
+
+	jsonPose["position"] = {pose_msg->pose.pose.position.x,pose_msg->pose.pose.position.y,pose_msg->pose.pose.position.z};
+	jsonPose["quaternion"] = {pose_msg->pose.pose.orientation.x,pose_msg->pose.pose.orientation.y,pose_msg->pose.pose.orientation.z,pose_msg->pose.pose.orientation.w};
+	jsonPosition["pose"] = jsonPose;
+	jsonEstimate["position"]["posData"] =  jsonPosition;
+
+	jsonMsg["estimate"] = jsonEstimate;
 
 	RestClient::Response r = conn->post(this->_route, jsonMsg.dump());
+	ROS_DEBUG("%s", r.body.c_str());
 
 
 }

@@ -52,7 +52,8 @@ int main(int argc, char *argv[])
     stringStream << poseTopic.c_str() << "/" << targetDeviceId.c_str();
     std::string topicPos = stringStream.str();
 
-    ros::Subscriber sub0 = n.subscribe<geometry_msgs::PoseWithCovarianceStamped>(topicPos, 12, &RTLSPose::newPose, &rtlsPose);
+    ROS_INFO("Node pose: Topic Pos: %s", topicPos.c_str());
+    ros::Subscriber sub0 = n.subscribe<geometry_msgs::PoseWithCovarianceStamped>(topicPos, 100, &RTLSPose::newPose, &rtlsPose);
 
     ros::spin();
 
